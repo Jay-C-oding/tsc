@@ -1,0 +1,24 @@
+{
+  "name": "tsc",
+  "version": "1.0.0",
+  "description": "tsc exercises",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jay-C-oding/tsc-socket.git"
+  },
+  "author": "Jay",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jay-C-oding/tsc-socket/issues"
+  },
+  "homepage": "https://github.com/Jay-C-oding/tsc-socket#readme",
+  "dependencies": {
+    "@types/node": "^16.9.6",
+    "@types/socket.io": "^3.0.2",
+    "socket.io": "^4.2.0"
+  }
+}
