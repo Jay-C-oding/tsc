@@ -4,9 +4,13 @@ class Client {
   constructor() {
     this.socket = io();
 
-    this.socket.on('message', function (message: any) {
-      console.log(message);
-      document.body.innerHTML += message + '<br/>';
+    this.socket.on('connect', function () {
+      console.log('connect');
+    });
+
+    this.socket.on('disconnect', function (message: any) {
+      console.log('disconnect ' + message);
+      location.reload();
     });
   }
 }
