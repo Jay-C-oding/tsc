@@ -3,7 +3,7 @@ import path from 'path';
 import http from 'http';
 import socketIO from 'socket.io';
 
-const port: number = 5500;
+const port: number = 3000;
 
 class App {
   private server: http.Server;
@@ -14,8 +14,13 @@ class App {
 
     const app = express();
     app.use(express.static(path.join(__dirname, '../client')));
+
     this.server = new http.Server();
     const io = new socketIO.Server(this.server);
+
+    io.on('connection', function (socket: socketIO.Socket) {
+      console.log('a user connected : ' + socket.id);
+    });
   }
 
   public Start() {

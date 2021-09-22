@@ -7,7 +7,7 @@ const express_1 = __importDefault(require("express"));
 const path_1 = __importDefault(require("path"));
 const http_1 = __importDefault(require("http"));
 const socket_io_1 = __importDefault(require("socket.io"));
-const port = 5500;
+const port = 3000;
 class App {
     constructor(port) {
         this.port = port;
@@ -15,6 +15,9 @@ class App {
         app.use(express_1.default.static(path_1.default.join(__dirname, '../client')));
         this.server = new http_1.default.Server();
         const io = new socket_io_1.default.Server(this.server);
+        io.on('connection', function (socket) {
+            console.log('a user connected : ' + socket.id);
+        });
     }
     Start() {
         this.server.listen(this.port, () => {
