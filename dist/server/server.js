@@ -13,16 +13,20 @@ class App {
         this.port = port;
         const app = (0, express_1.default)();
         app.use(express_1.default.static(path_1.default.join(__dirname, '../client')));
-        this.server = new http_1.default.Server();
-        const io = new socket_io_1.default.Server(this.server);
-        io.on('connection', function (socket) {
+        this.server = new http_1.default.Server(app);
+        this.io = new socket_io_1.default.Server(this.server);
+        this.io.on('connection', (socket) => {
             console.log('a user connected : ' + socket.id);
+            socket.emit('message', 'Hello ' + socket.id);
+            socket.broadcast.emit('message', 'Everybody, say hello to ' + socket.id);
+            socket.on('disconnect', function () {
+                console.log('socket disconnected : ' + socket.id);
+            });
         });
     }
     Start() {
-        this.server.listen(this.port, () => {
-            console.log(`Server listening on port ${this.port}.`);
-        });
+        this.server.listen(this.port);
+        console.log(`Server listening on port ${this.port}.`);
     }
 }
 new App(port).Start();
